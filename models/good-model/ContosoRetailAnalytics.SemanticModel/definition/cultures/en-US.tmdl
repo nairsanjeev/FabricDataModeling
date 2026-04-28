@@ -1,0 +1,248 @@
+culture en-US
+	linguisticMetadata = json
+		```
+		{
+			"Version": "1.0.0",
+			"Language": "en-US",
+			"DynamicImprovement": "HighConfidence",
+			"Entities": {
+				"Sales": {
+					"Definition": "The central fact table containing all retail transactions for Contoso stores.",
+					"Terms": [
+						{"orders": {"Weight": 0.9}},
+						{"transactions": {"Weight": 0.9}},
+						{"purchases": {"Weight": 0.8}},
+						{"deals": {"Weight": 0.6}}
+					]
+				},
+				"Sales.Total Sales": {
+					"Definition": "The total net revenue from all sales transactions after discounts.",
+					"Terms": [
+						{"revenue": {"Weight": 1.0}},
+						{"total revenue": {"Weight": 1.0}},
+						{"income": {"Weight": 0.8}},
+						{"sales amount": {"Weight": 0.9}},
+						{"turnover": {"Weight": 0.7}},
+						{"top line": {"Weight": 0.7}}
+					]
+				},
+				"Sales.Total Quantity": {
+					"Definition": "The total number of product units sold.",
+					"Terms": [
+						{"units sold": {"Weight": 0.9}},
+						{"volume": {"Weight": 0.8}},
+						{"items sold": {"Weight": 0.9}},
+						{"quantity sold": {"Weight": 1.0}}
+					]
+				},
+				"Sales.Gross Profit": {
+					"Definition": "The profit after subtracting cost of goods sold from revenue.",
+					"Terms": [
+						{"profit": {"Weight": 1.0}},
+						{"margin": {"Weight": 0.8}},
+						{"gross margin": {"Weight": 0.9}},
+						{"earnings": {"Weight": 0.7}},
+						{"GP": {"Weight": 0.8}}
+					]
+				},
+				"Sales.Profit Margin %": {
+					"Definition": "The percentage of each dollar of revenue retained as profit.",
+					"Terms": [
+						{"margin percent": {"Weight": 0.9}},
+						{"profit percentage": {"Weight": 0.9}},
+						{"profitability rate": {"Weight": 0.8}},
+						{"margin rate": {"Weight": 0.8}}
+					]
+				},
+				"Sales.Total Cost": {
+					"Definition": "The total cost of goods sold (COGS).",
+					"Terms": [
+						{"COGS": {"Weight": 0.9}},
+						{"cost of goods": {"Weight": 0.9}},
+						{"cost of sales": {"Weight": 0.8}},
+						{"product cost": {"Weight": 0.7}}
+					]
+				},
+				"Sales.Total Discount": {
+					"Definition": "The total discount amount applied across all transactions.",
+					"Terms": [
+						{"discounts given": {"Weight": 0.9}},
+						{"discount amount": {"Weight": 0.9}},
+						{"rebates": {"Weight": 0.6}},
+						{"price reductions": {"Weight": 0.7}}
+					]
+				},
+				"Sales.YoY Growth %": {
+					"Definition": "The year-over-year percentage change in sales compared to the same period last year.",
+					"Terms": [
+						{"growth rate": {"Weight": 0.9}},
+						{"year over year": {"Weight": 1.0}},
+						{"annual growth": {"Weight": 0.8}},
+						{"sales growth": {"Weight": 0.9}},
+						{"YoY": {"Weight": 1.0}},
+						{"year-over-year change": {"Weight": 0.9}}
+					]
+				},
+				"Sales.Average Order Value": {
+					"Definition": "The average revenue per individual order.",
+					"Terms": [
+						{"AOV": {"Weight": 0.9}},
+						{"average transaction": {"Weight": 0.8}},
+						{"average basket": {"Weight": 0.7}},
+						{"basket size": {"Weight": 0.7}},
+						{"average sale": {"Weight": 0.8}}
+					]
+				},
+				"Sales.Order Count": {
+					"Definition": "The total number of unique orders placed.",
+					"Terms": [
+						{"number of orders": {"Weight": 1.0}},
+						{"transaction count": {"Weight": 0.9}},
+						{"number of transactions": {"Weight": 0.9}},
+						{"how many orders": {"Weight": 0.9}}
+					]
+				},
+				"Sales.Customer Count": {
+					"Definition": "The total number of unique customers who made purchases.",
+					"Terms": [
+						{"number of customers": {"Weight": 1.0}},
+						{"customer base": {"Weight": 0.7}},
+						{"unique customers": {"Weight": 0.9}},
+						{"active customers": {"Weight": 0.8}},
+						{"how many customers": {"Weight": 0.9}}
+					]
+				},
+				"Sales.Revenue Per Customer": {
+					"Definition": "The average revenue generated per individual customer.",
+					"Terms": [
+						{"customer value": {"Weight": 0.8}},
+						{"per customer revenue": {"Weight": 0.9}},
+						{"average customer spend": {"Weight": 0.8}},
+						{"customer spend": {"Weight": 0.7}}
+					]
+				},
+				"Product": {
+					"Definition": "Products sold by Contoso retail stores, organized by Category and Subcategory.",
+					"Terms": [
+						{"item": {"Weight": 0.8}},
+						{"merchandise": {"Weight": 0.7}},
+						{"SKU": {"Weight": 0.7}},
+						{"goods": {"Weight": 0.6}}
+					]
+				},
+				"Product.Category": {
+					"Definition": "The top-level product grouping: Electronics, Clothing, Home & Garden, Sports & Outdoors, Food & Beverage.",
+					"Terms": [
+						{"product category": {"Weight": 1.0}},
+						{"product group": {"Weight": 0.8}},
+						{"product type": {"Weight": 0.8}},
+						{"department": {"Weight": 0.7}},
+						{"product line": {"Weight": 0.7}}
+					]
+				},
+				"Product.Brand": {
+					"Definition": "The manufacturer or brand of the product.",
+					"Terms": [
+						{"manufacturer": {"Weight": 0.8}},
+						{"vendor": {"Weight": 0.6}},
+						{"make": {"Weight": 0.5}},
+						{"label": {"Weight": 0.5}}
+					]
+				},
+				"Customer": {
+					"Definition": "Customers who purchase from Contoso stores, classified by Segment and Loyalty Tier.",
+					"Terms": [
+						{"buyer": {"Weight": 0.8}},
+						{"client": {"Weight": 0.8}},
+						{"shopper": {"Weight": 0.7}},
+						{"patron": {"Weight": 0.5}},
+						{"account": {"Weight": 0.6}}
+					]
+				},
+				"Customer.Segment": {
+					"Definition": "The business classification of the customer: Enterprise, Mid-Market, Small Business, or Consumer.",
+					"Terms": [
+						{"customer segment": {"Weight": 1.0}},
+						{"customer type": {"Weight": 0.9}},
+						{"account type": {"Weight": 0.7}},
+						{"business type": {"Weight": 0.7}},
+						{"customer class": {"Weight": 0.7}}
+					]
+				},
+				"Customer.Loyalty Tier": {
+					"Definition": "The loyalty program membership level from highest to lowest: Platinum, Gold, Silver, Bronze.",
+					"Terms": [
+						{"loyalty level": {"Weight": 0.9}},
+						{"loyalty status": {"Weight": 0.8}},
+						{"membership tier": {"Weight": 0.8}},
+						{"member level": {"Weight": 0.7}},
+						{"VIP level": {"Weight": 0.6}}
+					]
+				},
+				"Customer.Region": {
+					"Definition": "The geographic sales region: Northeast, Southeast, Midwest, West, Pacific, South.",
+					"Terms": [
+						{"area": {"Weight": 0.7}},
+						{"territory": {"Weight": 0.7}},
+						{"geographic region": {"Weight": 0.9}},
+						{"sales region": {"Weight": 0.9}},
+						{"market": {"Weight": 0.6}}
+					]
+				},
+				"Store": {
+					"Definition": "Contoso physical retail store locations across the United States.",
+					"Terms": [
+						{"location": {"Weight": 0.8}},
+						{"retail location": {"Weight": 0.8}},
+						{"shop": {"Weight": 0.7}},
+						{"outlet": {"Weight": 0.5}},
+						{"branch": {"Weight": 0.6}}
+					]
+				},
+				"Store.Store Type": {
+					"Definition": "The classification of the store: Flagship (largest), Premium (upscale), Standard (typical), Outlet (discount).",
+					"Terms": [
+						{"store format": {"Weight": 0.8}},
+						{"store classification": {"Weight": 0.8}},
+						{"store category": {"Weight": 0.7}},
+						{"location type": {"Weight": 0.7}}
+					]
+				},
+				"Calendar": {
+					"Definition": "The date dimension table used for all time-based analysis. Fiscal year runs July-June.",
+					"Terms": [
+						{"date": {"Weight": 0.9}},
+						{"time": {"Weight": 0.7}},
+						{"period": {"Weight": 0.7}},
+						{"when": {"Weight": 0.7}}
+					]
+				},
+				"Calendar.Fiscal Year": {
+					"Definition": "Contoso fiscal year (July 1 - June 30). FY2025 means July 2024 through June 2025.",
+					"Terms": [
+						{"FY": {"Weight": 0.9}},
+						{"financial year": {"Weight": 0.8}},
+						{"fiscal period": {"Weight": 0.7}}
+					]
+				},
+				"Calendar.Is Weekend": {
+					"Definition": "Flag indicating Saturday (1) or Sunday (1) vs weekday (0).",
+					"Terms": [
+						{"weekend flag": {"Weight": 0.9}},
+						{"Saturday or Sunday": {"Weight": 0.8}},
+						{"weekend indicator": {"Weight": 0.8}}
+					]
+				},
+				"Promotion": {
+					"Definition": "Promotional campaigns and discounts applied to sales transactions.",
+					"Terms": [
+						{"promo": {"Weight": 0.9}},
+						{"campaign": {"Weight": 0.7}},
+						{"offer": {"Weight": 0.7}},
+						{"deal": {"Weight": 0.7}},
+						{"special": {"Weight": 0.5}}
+					]
+				}
+			}
+		}
+		```

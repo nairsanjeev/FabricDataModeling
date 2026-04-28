@@ -1,0 +1,55 @@
+/// The Promotion dimension contains all promotional campaigns and discount programs.
+/// A PromotionKey of 0 means "No Promotion" — the sale occurred at regular price.
+/// Promotions are categorized as: Seasonal, Holiday, Loyalty, Acquisition, or Clearance.
+table Promotion
+	lineageTag: d0000006-0000-0000-0000-000000000001
+
+	/// Unique identifier for each promotion. 0 = No Promotion (regular price sale).
+	column PromotionKey
+		dataType: int64
+		lineageTag: d0000006-0001-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+	/// The name of the promotional campaign (e.g., "Summer Blowout", "Black Friday Deal"). "No Promotion" means the item sold at regular price.
+	column 'Promotion Name'
+		dataType: string
+		lineageTag: d0000006-0002-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: PromotionName
+
+	/// The discount percentage offered by this promotion (0-100). 0 means no discount.
+	column 'Discount Percent'
+		dataType: int64
+		lineageTag: d0000006-0003-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: DiscountPercent
+		formatString: 0"%"
+
+	/// The date when the promotion became active.
+	column 'Start Date'
+		dataType: string
+		lineageTag: d0000006-0004-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: StartDate
+
+	/// The date when the promotion ended.
+	column 'End Date'
+		dataType: string
+		lineageTag: d0000006-0005-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: EndDate
+
+	/// The category of the promotion. Values: None (no promo), Seasonal, Holiday, Loyalty, Acquisition, Clearance.
+	column 'Promotion Category'
+		dataType: string
+		lineageTag: d0000006-0006-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: PromotionCategory
+
+	partition Promotion = entity
+		mode: directLake
+		source
+			entityName: promotion
+			schemaName: dbo
+			expressionSource: DatabaseQuery

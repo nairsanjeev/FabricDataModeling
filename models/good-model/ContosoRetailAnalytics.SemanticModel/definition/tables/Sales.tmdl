@@ -1,0 +1,192 @@
+/// The Sales table is the central fact table containing all retail transaction records.
+/// Each row represents a single line item in a customer order.
+/// Use the measures defined in this table (Total Sales, Gross Profit, etc.) for all reporting.
+/// Do NOT sum raw columns directly — always use the predefined measures for accurate results.
+table Sales
+	lineageTag: d0000001-0000-0000-0000-000000000001
+
+	/// Unique identifier for each sales order. Not used for calculations.
+	column OrderKey
+		dataType: int64
+		lineageTag: d0000001-0001-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: OrderKey
+
+	/// Foreign key linking to the Calendar dimension table. Format: YYYYMMDD.
+	column DateKey
+		dataType: int64
+		lineageTag: d0000001-0002-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: DateKey
+
+	/// Foreign key linking to the Customer dimension table.
+	column CustomerKey
+		dataType: int64
+		lineageTag: d0000001-0003-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+	/// Foreign key linking to the Product dimension table.
+	column ProductKey
+		dataType: int64
+		lineageTag: d0000001-0004-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+	/// Foreign key linking to the Store dimension table.
+	column StoreKey
+		dataType: int64
+		lineageTag: d0000001-0005-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+	/// Foreign key linking to the Promotion dimension table.
+	column PromotionKey
+		dataType: int64
+		lineageTag: d0000001-0006-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+	/// The number of units sold in this transaction.
+	column Quantity
+		dataType: int64
+		lineageTag: d0000001-0007-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: Quantity
+
+	/// The list price per unit at the time of sale, before any discounts.
+	column UnitPrice
+		dataType: double
+		lineageTag: d0000001-0008-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: UnitPrice
+		formatString: $#,##0.00
+
+	/// The total discount amount applied to this transaction.
+	column DiscountAmount
+		dataType: double
+		lineageTag: d0000001-0009-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: DiscountAmount
+		formatString: $#,##0.00
+
+	/// The net revenue from this transaction after discounts. This is the primary revenue column. SalesAmount = (Quantity × UnitPrice) - DiscountAmount.
+	column SalesAmount
+		dataType: double
+		lineageTag: d0000001-000a-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: SalesAmount
+		formatString: $#,##0.00
+
+	/// The total cost of goods sold for this transaction. CostAmount = Quantity × UnitCost.
+	column CostAmount
+		dataType: double
+		lineageTag: d0000001-000b-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: CostAmount
+		formatString: $#,##0.00
+
+	/// =====================================================
+	/// REVENUE MEASURES
+	/// =====================================================
+
+	/// Total Sales represents the total net revenue across all transactions. This is the primary revenue measure and should be used whenever someone asks about sales, revenue, or income. Formula: SUM of SalesAmount column.
+	measure 'Total Sales' = SUM(Sales[SalesAmount])
+		lineageTag: d0000001-0101-0000-0000-000000000001
+		formatString: $#,##0.00
+		displayFolder: Revenue
+
+	/// Total Quantity represents the total number of units sold across all transactions.
+	measure 'Total Quantity' = SUM(Sales[Quantity])
+		lineageTag: d0000001-0102-0000-0000-000000000001
+		formatString: #,##0
+		displayFolder: Revenue
+
+	/// Average Order Value is the average revenue per order. Use this to understand typical transaction size.
+	measure 'Average Order Value' = DIVIDE([Total Sales], DISTINCTCOUNT(Sales[OrderKey]), 0)
+		lineageTag: d0000001-0103-0000-0000-000000000001
+		formatString: $#,##0.00
+		displayFolder: Revenue
+
+	/// Total number of unique orders (transactions).
+	measure 'Order Count' = DISTINCTCOUNT(Sales[OrderKey])
+		lineageTag: d0000001-0104-0000-0000-000000000001
+		formatString: #,##0
+		displayFolder: Revenue
+
+	/// =====================================================
+	/// PROFITABILITY MEASURES
+	/// =====================================================
+
+	/// Total Cost is the total cost of goods sold (COGS) across all transactions.
+	measure 'Total Cost' = SUM(Sales[CostAmount])
+		lineageTag: d0000001-0201-0000-0000-000000000001
+		formatString: $#,##0.00
+		displayFolder: Profitability
+
+	/// Gross Profit is the profit after subtracting cost of goods sold from revenue. Gross Profit = Total Sales - Total Cost.
+	measure 'Gross Profit' = [Total Sales] - [Total Cost]
+		lineageTag: d0000001-0202-0000-0000-000000000001
+		formatString: $#,##0.00
+		displayFolder: Profitability
+
+	/// Profit Margin % is the percentage of revenue retained as profit after COGS. A higher margin indicates better profitability.
+	measure 'Profit Margin %' = DIVIDE([Gross Profit], [Total Sales], 0)
+		lineageTag: d0000001-0203-0000-0000-000000000001
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Profitability
+
+	/// =====================================================
+	/// DISCOUNT MEASURES
+	/// =====================================================
+
+	/// Total Discount is the sum of all discount amounts applied across transactions.
+	measure 'Total Discount' = SUM(Sales[DiscountAmount])
+		lineageTag: d0000001-0301-0000-0000-000000000001
+		formatString: $#,##0.00
+		displayFolder: Discounts
+
+	/// Discount Rate is the percentage of gross revenue given as discounts.
+	measure 'Discount Rate' = DIVIDE([Total Discount], [Total Sales] + [Total Discount], 0)
+		lineageTag: d0000001-0302-0000-0000-000000000001
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Discounts
+
+	/// =====================================================
+	/// TIME INTELLIGENCE MEASURES
+	/// =====================================================
+
+	/// Same period last year sales for year-over-year comparison.
+	measure 'Total Sales SPLY' = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Calendar[Date]))
+		lineageTag: d0000001-0401-0000-0000-000000000001
+		formatString: $#,##0.00
+		displayFolder: Time Intelligence
+
+	/// Year-over-Year growth rate as a percentage. Positive values indicate growth.
+	measure 'YoY Growth %' = DIVIDE([Total Sales] - [Total Sales SPLY], [Total Sales SPLY], 0)
+		lineageTag: d0000001-0402-0000-0000-000000000001
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Time Intelligence
+
+	/// =====================================================
+	/// CUSTOMER MEASURES
+	/// =====================================================
+
+	/// Total number of unique customers who made purchases.
+	measure 'Customer Count' = DISTINCTCOUNT(Sales[CustomerKey])
+		lineageTag: d0000001-0501-0000-0000-000000000001
+		formatString: #,##0
+		displayFolder: Customer
+
+	/// Average revenue generated per customer.
+	measure 'Revenue Per Customer' = DIVIDE([Total Sales], [Customer Count], 0)
+		lineageTag: d0000001-0502-0000-0000-000000000001
+		formatString: $#,##0.00
+		displayFolder: Customer
+
+	partition Sales = entity
+		mode: directLake
+		source
+			entityName: sales
+			schemaName: dbo
+			expressionSource: DatabaseQuery

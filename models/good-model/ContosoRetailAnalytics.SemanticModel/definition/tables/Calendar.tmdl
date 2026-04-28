@@ -1,0 +1,178 @@
+/// The Calendar dimension is the date table for all time-based analysis.
+/// It contains both standard calendar attributes and fiscal calendar attributes.
+/// Contoso's fiscal year runs from July 1 to June 30 (e.g., FY2025 = July 2024 - June 2025).
+/// This table MUST be used for all date filtering — do not use DateKey from the Sales table directly.
+/// Mark this table as the Date table in the model with the Date column as the date column.
+table Calendar
+	lineageTag: d0000005-0000-0000-0000-000000000001
+	dataCategory: Time
+
+	/// Integer key in YYYYMMDD format. Used for joining to the Sales fact table.
+	column DateKey
+		dataType: int64
+		lineageTag: d0000005-0001-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: DateKey
+
+	/// The actual calendar date. This is the primary date column for time intelligence calculations.
+	column Date
+		dataType: dateTime
+		lineageTag: d0000005-0002-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: Date
+		formatString: MM/dd/yyyy
+		dataCategory: Date
+		isKey
+
+	/// The calendar year (e.g., 2023, 2024, 2025).
+	column Year
+		dataType: int64
+		lineageTag: d0000005-0003-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: Year
+
+	/// The calendar quarter label (Q1, Q2, Q3, Q4). Q1 = Jan-Mar, Q2 = Apr-Jun, Q3 = Jul-Sep, Q4 = Oct-Dec.
+	column Quarter
+		dataType: string
+		lineageTag: d0000005-0004-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	/// The calendar quarter as a number (1-4).
+	column 'Quarter Number'
+		dataType: int64
+		lineageTag: d0000005-0004-0001-0000-000000000001
+		summarizeBy: none
+		sourceColumn: QuarterNumber
+
+	/// The full month name (e.g., January, February).
+	column Month
+		dataType: string
+		lineageTag: d0000005-0005-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month Number'
+
+	/// The month as a number (1-12) for proper sorting.
+	column 'Month Number'
+		dataType: int64
+		lineageTag: d0000005-0006-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+	/// Month and year combined for display (e.g., "Jan 2024").
+	column 'Month Year'
+		dataType: string
+		lineageTag: d0000005-0006-0001-0000-000000000001
+		summarizeBy: none
+		sourceColumn: MonthYear
+		sortByColumn: YearMonth
+
+	/// Numeric sort key in YYYYMM format for proper chronological ordering of Month Year.
+	column YearMonth
+		dataType: int64
+		lineageTag: d0000005-0006-0002-0000-000000000001
+		summarizeBy: none
+		sourceColumn: YearMonth
+		isHidden
+
+	/// The ISO week number of the year (1-53).
+	column Week
+		dataType: int64
+		lineageTag: d0000005-0007-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: Week
+
+	/// The full name of the day of the week (e.g., Monday, Tuesday).
+	column 'Day of Week'
+		dataType: string
+		lineageTag: d0000005-0008-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+		sortByColumn: 'Day of Week Number'
+
+	/// The day of the week as a number (1=Monday through 7=Sunday) for proper sorting.
+	column 'Day of Week Number'
+		dataType: int64
+		lineageTag: d0000005-0009-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: DayOfWeekNumber
+		isHidden
+
+	/// Indicates whether this date falls on a weekend (Saturday or Sunday). 1 = Weekend, 0 = Weekday.
+	column 'Is Weekend'
+		dataType: int64
+		lineageTag: d0000005-0010-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: IsWeekend
+
+	/// The Contoso fiscal year label (e.g., FY2025). Fiscal year runs July 1 - June 30.
+	column 'Fiscal Year'
+		dataType: string
+		lineageTag: d0000005-0011-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: FiscalYear
+
+	/// The Contoso fiscal year as a number for sorting and calculations.
+	column 'Fiscal Year Number'
+		dataType: int64
+		lineageTag: d0000005-0011-0001-0000-000000000001
+		summarizeBy: none
+		sourceColumn: FiscalYearNumber
+		isHidden
+
+	/// The Contoso fiscal quarter label (e.g., FQ1). FQ1 = Jul-Sep, FQ2 = Oct-Dec, FQ3 = Jan-Mar, FQ4 = Apr-Jun.
+	column 'Fiscal Quarter'
+		dataType: string
+		lineageTag: d0000005-0012-0000-0000-000000000001
+		summarizeBy: none
+		sourceColumn: FiscalQuarter
+
+	/// The Contoso fiscal quarter as a number (1-4).
+	column 'Fiscal Quarter Number'
+		dataType: int64
+		lineageTag: d0000005-0012-0001-0000-000000000001
+		summarizeBy: none
+		sourceColumn: FiscalQuarterNumber
+		isHidden
+
+	hierarchy 'Calendar Hierarchy'
+		lineageTag: d0000005-1001-0000-0000-000000000001
+
+		level Year
+			lineageTag: d0000005-1002-0000-0000-000000000001
+			column: Year
+
+		level Quarter
+			lineageTag: d0000005-1003-0000-0000-000000000001
+			column: Quarter
+
+		level Month
+			lineageTag: d0000005-1004-0000-0000-000000000001
+			column: Month
+
+		level Date
+			lineageTag: d0000005-1005-0000-0000-000000000001
+			column: Date
+
+	hierarchy 'Fiscal Hierarchy'
+		lineageTag: d0000005-2001-0000-0000-000000000001
+
+		level 'Fiscal Year'
+			lineageTag: d0000005-2002-0000-0000-000000000001
+			column: 'Fiscal Year'
+
+		level 'Fiscal Quarter'
+			lineageTag: d0000005-2003-0000-0000-000000000001
+			column: 'Fiscal Quarter'
+
+		level Month
+			lineageTag: d0000005-2004-0000-0000-000000000001
+			column: Month
+
+	partition Calendar = entity
+		mode: directLake
+		source
+			entityName: calendar
+			schemaName: dbo
+			expressionSource: DatabaseQuery
