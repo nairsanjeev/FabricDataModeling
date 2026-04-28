@@ -205,7 +205,7 @@ date_weights = date_weights / date_weights.sum()
 
 for _ in range(NUM_ORDERS):
     # Pick a random date (weighted toward recent)
-    order_date = np.random.choice(all_dates, p=date_weights)
+    order_date = pd.Timestamp(np.random.choice(all_dates, p=date_weights))
     date_key = int(order_date.strftime("%Y%m%d"))
 
     # Pick random dimensions
