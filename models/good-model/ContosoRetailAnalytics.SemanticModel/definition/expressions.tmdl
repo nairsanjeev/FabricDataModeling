@@ -2,7 +2,7 @@
 /// Find your SQL Endpoint in the Lakehouse settings in the Fabric portal.
 expression 'DatabaseQuery' =
 	let
-		database = Sql.Database("YOUR_SQL_ENDPOINT_HERE.datawarehouse.fabric.microsoft.com", "ContosoRetailLakehouse")
+		database = Sql.Database("ozdzcygo7zdezfhdxdo6ovtyrm-j6vklusao55unlhcumtlgertwi.datawarehouse.fabric.microsoft.com", "ContosoRetailLakehouse")
 	in
 		database
 	lineageTag: c0000001-0000-0000-0000-000000000001

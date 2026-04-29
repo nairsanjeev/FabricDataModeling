@@ -3,28 +3,24 @@
 /// Geographic hierarchy: Country → Region → State → City.
 table Customer
 	lineageTag: d0000003-0000-0000-0000-000000000001
-
 	/// Unique identifier for each customer. Used as primary key and for joining to the Sales fact table.
 	column CustomerKey
 		dataType: int64
 		lineageTag: d0000003-0001-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: CustomerKey
-
 	/// The full name of the customer (First Last).
 	column 'Customer Name'
 		dataType: string
 		lineageTag: d0000003-0002-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: CustomerName
-
 	/// The customer's email address.
 	column Email
 		dataType: string
 		lineageTag: d0000003-0003-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: Email
-
 	/// The city where the customer is located.
 	column City
 		dataType: string
@@ -32,7 +28,6 @@ table Customer
 		summarizeBy: none
 		sourceColumn: City
 		dataCategory: City
-
 	/// The US state where the customer is located (two-letter abbreviation).
 	column State
 		dataType: string
@@ -40,7 +35,6 @@ table Customer
 		summarizeBy: none
 		sourceColumn: State
 		dataCategory: StateOrProvince
-
 	/// The country where the customer is located. Currently all customers are in the United States.
 	column Country
 		dataType: string
@@ -48,47 +42,38 @@ table Customer
 		summarizeBy: none
 		sourceColumn: Country
 		dataCategory: Country
-
 	/// The geographic sales region. Values: Northeast, Southeast, Midwest, West, Pacific, South.
 	column Region
 		dataType: string
 		lineageTag: d0000003-0007-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: Region
-
 	/// The business segment classification. Values: Enterprise (large corporations), Mid-Market (medium businesses), Small Business (small companies), Consumer (individual buyers).
 	column Segment
 		dataType: string
 		lineageTag: d0000003-0008-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: Segment
-
 	/// The loyalty program tier based on purchase history. Values from highest to lowest: Platinum, Gold, Silver, Bronze.
 	column 'Loyalty Tier'
 		dataType: string
 		lineageTag: d0000003-0009-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: LoyaltyTier
-
 	hierarchy 'Customer Geography'
 		lineageTag: d0000003-1001-0000-0000-000000000001
-
 		level Country
 			lineageTag: d0000003-1002-0000-0000-000000000001
 			column: Country
-
 		level Region
 			lineageTag: d0000003-1003-0000-0000-000000000001
 			column: Region
-
 		level State
 			lineageTag: d0000003-1004-0000-0000-000000000001
 			column: State
-
 		level City
 			lineageTag: d0000003-1005-0000-0000-000000000001
 			column: City
-
 	partition Customer = entity
 		mode: directLake
 		source

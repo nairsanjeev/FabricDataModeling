@@ -1,19 +1,15 @@
 relationship Sales_to_Calendar
 	fromColumn: Sales.DateKey
 	toColumn: Calendar.DateKey
-
 relationship Sales_to_Product
 	fromColumn: Sales.ProductKey
 	toColumn: Product.ProductKey
-
 relationship Sales_to_Customer
 	fromColumn: Sales.CustomerKey
 	toColumn: Customer.CustomerKey
-
 relationship Sales_to_Store
 	fromColumn: Sales.StoreKey
 	toColumn: Store.StoreKey
-
 relationship Sales_to_Promotion
 	fromColumn: Sales.PromotionKey
 	toColumn: Promotion.PromotionKey

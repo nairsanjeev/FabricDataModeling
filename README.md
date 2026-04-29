@@ -71,12 +71,17 @@ FabricDataModeling/
 2. **Option B:** Create from UI, then apply all metadata manually following the TMDL definitions
 3. Update the SQL endpoint and lakehouse name in `expressions.tmdl`
 
-### Step 5: Configure AI Instructions (Good Model)
+### Step 5: Configure AI Instructions & Verified Answers (Good Model)
 
 1. Open the good model in Fabric portal
 2. Go to **Model settings** → **AI Instructions**
 3. Copy the instructions from [`demo/ai-instructions-reference.md`](demo/ai-instructions-reference.md)
 4. Also run **Prep data for AI** from the model settings
+5. **Set up Verified Answers (Preview):**
+   - Create or open a Power BI report connected to the good model
+   - Right-click a key visual (e.g., Total Sales by Category) and select **"Set up verified answer"**
+   - Add common phrases or questions users might ask about that visual
+   - Copilot will show the saved verified answer when users ask related questions in chat
 
 ### Step 6: Run the Demo
 

@@ -3,21 +3,18 @@
 /// Geographic hierarchy: Country → Region → State → City → Store Name.
 table Store
 	lineageTag: d0000004-0000-0000-0000-000000000001
-
 	/// Unique identifier for each store. Used as primary key and for joining to the Sales fact table.
 	column StoreKey
 		dataType: int64
 		lineageTag: d0000004-0001-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: StoreKey
-
 	/// The display name of the store (e.g., "Contoso Flagship NYC").
 	column 'Store Name'
 		dataType: string
 		lineageTag: d0000004-0002-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: StoreName
-
 	/// The city where the store is physically located.
 	column City
 		dataType: string
@@ -25,7 +22,6 @@ table Store
 		summarizeBy: none
 		sourceColumn: City
 		dataCategory: City
-
 	/// The US state where the store is located (two-letter abbreviation).
 	column State
 		dataType: string
@@ -33,7 +29,6 @@ table Store
 		summarizeBy: none
 		sourceColumn: State
 		dataCategory: StateOrProvince
-
 	/// The country where the store is located.
 	column Country
 		dataType: string
@@ -41,28 +36,24 @@ table Store
 		summarizeBy: none
 		sourceColumn: Country
 		dataCategory: Country
-
 	/// The geographic sales region the store belongs to. Values: Northeast, South, Midwest, West, Pacific.
 	column Region
 		dataType: string
 		lineageTag: d0000004-0006-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: Region
-
 	/// The classification of the store. Flagship = largest with full product line. Premium = high-end locations. Standard = typical retail stores. Outlet = discount/clearance locations.
 	column 'Store Type'
 		dataType: string
 		lineageTag: d0000004-0007-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: StoreType
-
 	/// The date the store first opened for business.
 	column 'Open Date'
 		dataType: string
 		lineageTag: d0000004-0008-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: OpenDate
-
 	/// The total retail floor area of the store in square feet.
 	column 'Square Footage'
 		dataType: int64
@@ -70,30 +61,23 @@ table Store
 		summarizeBy: none
 		sourceColumn: SquareFootage
 		formatString: #,##0
-
 	hierarchy 'Store Geography'
 		lineageTag: d0000004-1001-0000-0000-000000000001
-
 		level Country
 			lineageTag: d0000004-1002-0000-0000-000000000001
 			column: Country
-
 		level Region
 			lineageTag: d0000004-1003-0000-0000-000000000001
 			column: Region
-
 		level State
 			lineageTag: d0000004-1004-0000-0000-000000000001
 			column: State
-
 		level City
 			lineageTag: d0000004-1005-0000-0000-000000000001
 			column: City
-
 		level 'Store Name'
 			lineageTag: d0000004-1006-0000-0000-000000000001
 			column: 'Store Name'
-
 	partition Store = entity
 		mode: directLake
 		source

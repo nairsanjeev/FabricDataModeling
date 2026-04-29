@@ -206,6 +206,27 @@
 >
 > "This bridges the gap between how business users talk and how the model is technically structured."
 
+#### 7. Verified Answers (Preview)
+
+> "There's one more feature I want to highlight — **Verified Answers**. This is a preview feature that lets you pin specific visuals as the definitive answer to common questions."
+>
+> [Open a Power BI report connected to the good model]
+>
+> "Here's how it works:"
+>
+> 1. "Find a visual that answers a common business question — like a chart showing Total Sales by Product Category."
+> 2. "Right-click the visual and select **'Set up verified answer'**."
+> 3. "Add common phrases or questions users might ask — like 'What are sales by category?', 'Show me revenue by product group', 'Which department sells the most?'"
+>
+> "Now when a user asks any of those related questions in Copilot chat, instead of generating a new answer, Copilot will show **your saved verified answer** — the exact visual you curated."
+>
+> "Think of it as **bookmarking the correct answer** for your most important business questions. It removes all uncertainty — the answer isn't generated, it's **verified by you**."
+>
+> "This is especially powerful for:"
+> - "Executive dashboard KPIs that must always look the same"
+> - "Regulated metrics where the calculation method matters"
+> - "Frequently asked questions where you want instant, consistent responses"
+
 ### Live NLP Testing — Good Model
 
 > **PRESENTER:**
@@ -306,7 +327,7 @@
 
 ---
 
-## PART 5: PREP DATA FOR AI (3 minutes)
+## PART 5: PREP DATA FOR AI & VERIFIED ANSWERS (5 minutes)
 
 > **PRESENTER:**
 >
@@ -325,6 +346,31 @@
 > [Run or show the feature]
 >
 > "Think of Prep data for AI as your AI readiness assessment. It tells you the gaps. You fill them with business knowledge."
+
+### Setting Up Verified Answers (Live Demo)
+
+> **PRESENTER:**
+>
+> "Let me show you one more powerful feature — **Verified Answers**. This lets you pin specific report visuals as the guaranteed answer to common questions."
+>
+> [Open a Power BI report connected to the Contoso Retail Analytics model]
+>
+> "Let's say this bar chart shows Total Sales by Product Category — one of the most common questions executives ask."
+>
+> [Right-click the visual]
+>
+> 1. "I right-click the visual and select **'Set up verified answer'**."
+> 2. "Now I add common phrases users might ask: 'What are sales by category?', 'Revenue by product type', 'Show me sales by department'."
+> 3. "I save it. Done."
+>
+> "Now when anyone asks Copilot a related question, they get **this exact visual** — not a generated guess, but the verified, curated answer you approved."
+>
+> "This is a game-changer for:"
+> - "**Consistency** — everyone sees the same answer"
+> - "**Trust** — the answer is human-verified, not AI-generated"
+> - "**Speed** — Copilot returns it instantly without computation"
+>
+> "Combine verified answers with AI instructions and synonyms, and you have a complete AI guidance layer: synonyms handle vocabulary, AI instructions handle business rules, and verified answers handle your most critical questions."
 
 ---
 
@@ -480,10 +526,9 @@
 | Part 2: Bad Model Demo | 10 min | 15 min |
 | Part 3: Good Model Demo | 15 min | 30 min |
 | Part 4: What Made the Difference | 5 min | 35 min |
-| Part 5: Prep Data for AI | 3 min | 38 min |
-| Part 6: VS Code Agent Mode | 15 min | 53 min |
-| Part 7: Takeaways | 5 min | 58 min |
-| Q&A Buffer | 2 min | 60 min |
+| Part 5: Prep Data for AI & Verified Answers | 5 min | 40 min |
+| Part 6: VS Code Agent Mode | 15 min | 55 min |
+| Part 7: Takeaways | 5 min | 60 min |
 
 ### Shortened Version (45 min)
 - Reduce Part 2 to 3 questions (5 min)

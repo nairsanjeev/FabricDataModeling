@@ -3,42 +3,36 @@
 /// This table is used to analyze sales performance by product attributes.
 table Product
 	lineageTag: d0000002-0000-0000-0000-000000000001
-
 	/// Unique identifier for each product. Used as the primary key and for joining to the Sales fact table.
 	column ProductKey
 		dataType: int64
 		lineageTag: d0000002-0001-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: ProductKey
-
 	/// The display name of the product as known to customers and used in reporting.
 	column 'Product Name'
 		dataType: string
 		lineageTag: d0000002-0002-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: ProductName
-
 	/// The top-level product grouping. Categories include: Electronics, Clothing, Home & Garden, Sports & Outdoors, and Food & Beverage.
 	column Category
 		dataType: string
 		lineageTag: d0000002-0003-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: Category
-
 	/// The mid-level product grouping within a Category. Examples: Laptops (under Electronics), Kitchen (under Home & Garden).
 	column Subcategory
 		dataType: string
 		lineageTag: d0000002-0004-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: Subcategory
-
 	/// The manufacturer or brand name of the product. Examples: Apple, Nike, KitchenAid.
 	column Brand
 		dataType: string
 		lineageTag: d0000002-0005-0000-0000-000000000001
 		summarizeBy: none
 		sourceColumn: Brand
-
 	/// The wholesale cost per unit that Contoso pays to acquire this product.
 	column 'Unit Cost'
 		dataType: double
@@ -46,7 +40,6 @@ table Product
 		summarizeBy: none
 		sourceColumn: UnitCost
 		formatString: $#,##0.00
-
 	/// The standard retail price per unit before any discounts or promotions.
 	column 'Unit Price'
 		dataType: double
@@ -54,22 +47,17 @@ table Product
 		summarizeBy: none
 		sourceColumn: UnitPrice
 		formatString: $#,##0.00
-
 	hierarchy 'Product Hierarchy'
 		lineageTag: d0000002-1001-0000-0000-000000000001
-
 		level Category
 			lineageTag: d0000002-1002-0000-0000-000000000001
 			column: Category
-
 		level Subcategory
 			lineageTag: d0000002-1003-0000-0000-000000000001
 			column: Subcategory
-
 		level 'Product Name'
 			lineageTag: d0000002-1004-0000-0000-000000000001
 			column: 'Product Name'
-
 	partition Product = entity
 		mode: directLake
 		source
